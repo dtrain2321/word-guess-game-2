@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- boot strap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Hangman Game</title>
+</head>
+
+
+<body>
+    
+    <div class="container">
+
+            <div class="jumbotron">
+                    <h1 class="display-4">Hangman!</h1>
+                    <p class="lead">Who doesn't love a great game of hangman.</p>
+                    <hr class="my-4">
+            </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Word to guess
+        </div>
+        <div class="panel-body">
+            <h3 id="wordtoguess">_ _ _ _ _ _ _</h3>
+        </div>
+    </div>
+
+<div class="card">
+        <div class="card-body">
+            Wrong Letters guessed:
+        </div>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            Guesses left: <span id="numguessesleft"></span>
+        </div>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            Games Won:
+        </div>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            Games Lost:
+        </div>
+</div>
+
+<script>
+
+    // create all var and arrays 
+var wordOptions = ["dog","cat","bird","horse"];
+var chosenWord = "";
+var letterinWord =[];
+var numBlanks = 0;
+var blanksAndSuccesses = [];
+var wrongGuesses = [];
+
+var winCount =0;
+var loseCount =0;
+var guessLeft =6;
+
+// create all functions
+
+function startGame (){
+selectWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+
+letterinWord = selectWord.split("");
+numBlanks = letterinWord.length;
+
+
+// reset 
+
+guessLeft =9;
+wrongGuesses = [];
+blanksAndSuccesses = [];
+
+// create blanks and successes with the right number of blanks
+
+for(var i=0; i<numBlanks; i++){
+   blanksAndSuccesses.push("_");
+
+}
+
+// change HTML
+
+document.getElementById("wordtoguess").innerHTML = blanksAndSuccesses.join("  ");
+document.getElementById("numguessesleft").innerHTML = guessLeft;
+document.getElementById("winCount").innerHTML = winCount;
+document.getElementById("loseCount").innerHTML = loseCount; 
+
+}
+
+function checkletters(Letter){
+
+    var isLetterinWord = false;
+     
+     for(var i=0; i<numBlanks; i++){
+         if(selectWord[i] == Letter){
+             isLetterinWord = true;
+         }
+     }
+
+// where is the word is the letter
+     for(var i=0; i<numBlanks; i++){
+         if(selectWord[i] == Letter){
+             blanksAndSuccesses[i] == Letter;
+         }
+     }
+     
+     else(wrongLetters).push(letter);
+     
+}
+
+
+
+
+// main section
+startGame();
+
+// key clicks
+
+document.onkeyup = function(event){
+    var letterGuessed = String.fromCharCode(event.keyCode).toLocaleLowerCase();
+    checkletters(letterGuessed);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
